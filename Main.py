@@ -177,7 +177,11 @@ def registered_member():
         print("Invalid Option\n")
         registered_member()
 
-
+def sub_menu():
+    option = input("Select Option \n1: Record Patient Data \n2: Synchronize Data with Server")
+    
+    
+    
 def main_menu():
     check_existence = input("Registered Member? \n1: Yes \n2: No\n")
     if check_existence == '1':

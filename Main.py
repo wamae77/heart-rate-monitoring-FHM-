@@ -98,7 +98,7 @@ def record_vitals():
     
     
 def sensor_vitals():
-    record = input("Record \n1: Temperature \n2: Heart Rate")
+    record = input("\nRecord \n1: Temperature \n2: Heart Rate\n")
     if record == '1':
         temperature = get_temperature()
     elif record == '2':
@@ -140,7 +140,7 @@ def register():
 
 
 def new_member():
-    action = input("1: Register \n2: Record Vitals\n \n0: Back \n00: Exit")
+    action = input("\n1: Register \n2: Record Vitals \n0: Back \t00: Exit\n")
     if action == "1":
         register()
     elif action == "2":
@@ -156,7 +156,7 @@ def new_member():
         new_member()
 
 def registered_member():
-    identifier = input("\nUse Identifier \n1: Phone Number \n2: National ID\n \n0: Back \n00: Exit")
+    identifier = input("\nUse Identifier \n1: Phone Number \n2: National ID \n0: Back \t00: Exit\n")
     if identifier == "1":
         phone_number = input("Enter Phone Number: ")
         if phone_number == "":
@@ -207,8 +207,8 @@ def save_new():
     
 
 def sub_menu():
-    print("Fetal Heart Rate Monitor...\n")
-    option = input("Select Option... \n1: Record Patient Data \n2: Send Data to Server \n0: Exit")
+    print("\nFetal Heart Rate Monitor...\n")
+    option = input("Select Option... \n1: Record Patient Data \n2: Send Data to Server \n0: Exit\n")
     if option == '1':
         main_menu()
     elif option == '2':
@@ -222,7 +222,7 @@ def sub_menu():
     
     
 def main_menu():
-    check_existence = input("Registered Member? \n1: Yes \n2: No\n \n0: Main Menu \n00: Exit")
+    check_existence = input("\nRegistered Member? \n1: Yes \n2: No \n0: Main Menu \t00: Exit\n")
     if check_existence == '1':
         registered_member()
     elif check_existence == '2':
@@ -235,7 +235,7 @@ def main_menu():
         print("Invalid Option\n")
         main_menu()
 
-print("Fetal Heart Rate Monitor...\n")
+print("Fetal Heart Rate Monitor...")
 first_name = None
 last_name = None
 date_of_birth = None

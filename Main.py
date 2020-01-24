@@ -178,7 +178,14 @@ def registered_member():
         registered_member()
 
 def sub_menu():
-    option = input("Select Option \n1: Record Patient Data \n2: Synchronize Data with Server")
+    option = input("Select Option \n1: Record Patient Data \n2: Send Data to Server")
+    if option == '1':
+        main_menu()
+    elif option == '2':
+        print('Sending data to server...')
+    else:
+        print("Invalid Option\n")
+        sub_menu()
     
     
     

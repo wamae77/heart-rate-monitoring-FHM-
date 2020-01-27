@@ -40,10 +40,11 @@ def send_message(message):
     s.connect(("192.168.0.69", 1234))
 
     while True:
-        s.send(bytes(message, "utf-8"))
+        s.send(bytes("prepare", "utf-8"))
+
         msg = s.recv(1024)
         if "send" == msg.decode("utf-8"):
-            print(msg.decode("utf-8"))
+            s.send(bytes(message, "utf-8"))
 
 
 def serial_getter(x):

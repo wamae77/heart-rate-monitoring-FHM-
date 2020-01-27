@@ -169,7 +169,7 @@ def registered_member():
             heart_rate = get_heartrate()
 
             data = (str(national_id), float(weight), float(height), float(temperature), float(heart_rate))
-            cursor.execute("INSERT INTO fetal_hrm_data(id_number,weight,height,temperature,heart_rate)VALUES(?,?,?,?,?)",  data)
+            cursor.execute("INSERT INTO fetal_hrm_data(id_number,weight,height,temperature,heart_rate)VALUES(?,?,?,?,?)", data)
             connection.commit()
             print("Data Saved Successfully!\n")
             main_menu()

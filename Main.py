@@ -2,6 +2,8 @@ import sqlite3
 import serial
 import statistics
 import pandas as pd
+import socket
+
 
 try:
     connection = sqlite3.connect("Fetal.db")
@@ -30,6 +32,18 @@ sql_create_table = """CREATE TABLE IF NOT EXISTS fetal_hrm_data  (
                     date_created DATETIME DEFAULT CURRENT_TIMESTAMP
                     );"""
 cursor.execute(sql_create_table)
+
+
+def send_message(message):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    s.connect(("192.168.0.69", 1234))
+
+    while True:
+        s.send(bytes(message, "utf-8"))
+        msg = s.recv(1024)
+        if "send" == msg.decode("utf-8"):
+            print(msg.decode("utf-8"))
 
 
 def serial_getter(x):

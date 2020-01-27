@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS fetal_hrm_data  (
+     ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+     first_name VARCHAR,
+     last_name VARCHAR,
+     date_of_birth DATE,
+     phone_number VARCHAR,
+     id_number VARCHAR,
+     location VARCHAR,
+     pregnancy_type VARCHAR,
+     expected_delivery_date DATE,
+     pregnancy_count VARCHAR,
+     health_centre VARCHAR,
+     height REAL,
+     weight REAL,
+     temperature REAL,
+     heart_rate REAL,
+     fetal_heart_rate REAL,
+     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+     server_sync INTEGER DEFAULT 0
+);

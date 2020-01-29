@@ -66,23 +66,22 @@ def serial_getter(x):
 
 
 def getmode(reading):
-
     data = pd.read_table(r"data.txt", header=None, usecols=[0])
-    
+
     if reading == 'temperature':
         res = input("Temperature: " + str(statistics.mode(data[0])) + "\n1. Continue \t 2. Record Again\n")
         if res == "2":
             get_temperature()
 
         return statistics.mode(data[0])
-    
+
     elif reading == 'heart_rate':
         res = input("Heart Rate: " + str(statistics.mode(data[0])) + "\n1. Continue \t 2. Record Again\n")
         if res == "2":
             get_heartrate()
 
         return statistics.mode(data[0])
-    
+
     else:
         return
 
@@ -94,16 +93,15 @@ def get_temperature():
 
 
 def get_heartrate():
-
     serial_getter("1")
     heart_rate = getmode("heart_rate")
     return heart_rate
-    
+
 
 def register():
     phone_number = input("Phone Number: ")
     national_id = input("National ID: ")
-    if national_id=="" and phone_number=="":
+    if national_id == "" and phone_number == "":
         print("Provide Phone Number or National ID")
         register()
     else:
@@ -119,9 +117,12 @@ def register():
         temperature = get_temperature()
         heart_rate = get_heartrate()
 
-        data = (str(national_id), str(phone_number), str(first_name), str(last_name), str(date_of_birth), str(location), str(pregnancy_type), str(expected_delivery_date), str(pregnancy_count), float(height), float(weight), float(temperature), float(heart_rate))
+        data = (str(national_id), str(phone_number), str(first_name), str(last_name), str(date_of_birth), str(location),
+                str(pregnancy_type), str(expected_delivery_date), str(pregnancy_count), float(height), float(weight),
+                float(temperature), float(heart_rate))
         cursor.execute(
-            "INSERT INTO fetal_hrm_data(id_number,phone_number,first_name,last_name, date_of_birth, location,pregnancy_type,expected_delivery_date,pregnancy_count,height,weight,temperature,heart_rate)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", data)
+            "INSERT INTO fetal_hrm_data(id_number,phone_number,first_name,last_name, date_of_birth, location,pregnancy_type,expected_delivery_date,pregnancy_count,height,weight,temperature,heart_rate)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            data)
         connection.commit()
         print("Record Saved Successfully\n")
         main_menu()
@@ -139,6 +140,7 @@ def new_member():
         print("Invalid Option\n")
         new_member()
 
+
 def registered_member():
     identifier = input("\nUse Identifier \n1: Phone Number \n2: National ID\n")
     if identifier == "1":
@@ -153,7 +155,8 @@ def registered_member():
             heart_rate = get_heartrate()
 
             data = (str(phone_number), float(weight), float(height), float(temperature), float(heart_rate))
-            cursor.execute("INSERT INTO fetal_hrm_data(phone_number,weight,height,temperature,heart_rate)VALUES(?,?,?,?,?)", data)
+            cursor.execute(
+                "INSERT INTO fetal_hrm_data(phone_number,weight,height,temperature,heart_rate)VALUES(?,?,?,?,?)", data)
             connection.commit()
             print("Data Saved Successfully!\n")
             main_menu()
@@ -169,7 +172,8 @@ def registered_member():
             heart_rate = get_heartrate()
 
             data = (str(national_id), float(weight), float(height), float(temperature), float(heart_rate))
-            cursor.execute("INSERT INTO fetal_hrm_data(id_number,weight,height,temperature,heart_rate)VALUES(?,?,?,?,?)", data)
+            cursor.execute(
+                "INSERT INTO fetal_hrm_data(id_number,weight,height,temperature,heart_rate)VALUES(?,?,?,?,?)", data)
             connection.commit()
             print("Data Saved Successfully!\n")
             main_menu()
@@ -177,11 +181,11 @@ def registered_member():
         print("Invalid Option\n")
         registered_member()
 
+
 def sub_menu():
     option = input("Select Option \n1: Record Patient Data \n2: Synchronize Data with Server")
-    
-    
-    
+
+
 def main_menu():
     check_existence = input("Registered Member? \n1: Yes \n2: No\n")
     if check_existence == '1':
@@ -192,5 +196,17 @@ def main_menu():
         print("Invalid Option\n")
         main_menu()
 
+
 print("Fetal Heart Rate Monitor...\n")
 main_menu()
+
+
+def sync_active():
+    clientsocket.send(bytes("path_to_file", "fetal.json"))
+    with open('path_to_file/fetal.json') as f:
+        data = json.load(f)
+        sql = "SELECT * FROM fetal_hrm_data"
+        if f == sql:
+            sql_create_table("DROP TABLE fetal_hrm_data")
+        else:
+            json.dump(f)

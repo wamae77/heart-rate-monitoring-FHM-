@@ -199,14 +199,3 @@ def main_menu():
 
 print("Fetal Heart Rate Monitor...\n")
 main_menu()
-
-
-def sync_active():
-    clientsocket.send(bytes("path_to_file", "fetal.json"))
-    with open('path_to_file/fetal.json') as f:
-        data = json.load(f)
-        sql = "SELECT * FROM fetal_hrm_data"
-        if f == sql:
-            sql_create_table("DROP TABLE fetal_hrm_data")
-        else:
-            json.dump(f)

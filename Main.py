@@ -29,7 +29,8 @@ sql_create_table = """CREATE TABLE IF NOT EXISTS fetal_hrm_data  (
                     temperature REAL,
                     heart_rate REAL,
                     fetal_heart_rate REAL,
-                    date_created DATETIME DEFAULT CURRENT_TIMESTAMP
+                    date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    server_sync INTEGER DEFAULT 0
                     );"""
 cursor.execute(sql_create_table)
 

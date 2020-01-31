@@ -3,6 +3,21 @@ import sqlite3 as sqlite
 import socket
 
 
+def rec_n_dlt():
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect(('localhost', 12345))
+    from_server = client.recv(4096)
+    if not from_server:
+        print('\nDisconnected from server')
+        client.close()
+    else:
+        received = from_server.decode()
+        check = cur.execute("SELECT * FROM fetal_hrm_data")
+        if received == check:
+            cur.execute("DROP TABLE fetal_hrm_data")
+            client.close()
+
+
 def send_message(data):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect(('localhost', 12345))
@@ -37,3 +52,4 @@ for i in range(len(myresult1)):
     data.append(messaged)
 
 send_message(data)
+rec_n_dlt()

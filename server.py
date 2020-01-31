@@ -1,4 +1,5 @@
 import socket
+
 serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print('socket succesfuly created')
 serv.bind(('localhost', 12345))
@@ -16,9 +17,14 @@ while True:
         file = open("rawData", "wb")
         file.write(data)
         file.close()
-        conn.sendall(b"I am SERVER\n")
-    conn.close()
-    print ('client disconnected')
+        data_rev = data[::-1]
+
+        # send back reversed data to client
+        conn.send(data_rev)
+        conn.close()
+        print('client disconnected')
+
+
 
 
 

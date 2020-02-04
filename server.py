@@ -1,4 +1,5 @@
 import socket
+import json
 
 serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print('socket succesfuly created')
@@ -17,14 +18,13 @@ while True:
         file = open("rawData", "wb")
         file.write(data)
         file.close()
-        data_rev = data[::-1]
 
-        # send back reversed data to client
-        conn.send(data_rev)
+        x = data.decode("utf-8")
+        arry = []
+        for y in json.loads(x):
+            arry.append(y["id_number"])
+            print(y["id_number"])
+
+        conn.send(bytes(json.dumps(arry), "utf-8"))
         conn.close()
         print('client disconnected')
-
-
-
-
-
